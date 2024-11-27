@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 class TestHTMLNode(unittest.TestCase):
 
@@ -28,10 +28,28 @@ class TestHTMLNode(unittest.TestCase):
 
         self.assertEqual(result, expected)
         
+
     def test__rpr__(self):
         node = HTMLNode(tag="h1", value="The heading text is an h1 tag", children=["listvalue1", "listvalue2", "listvalue3"], props={"href": "https://boot.dev", "target": "_blank"})
         repr_output = repr(node)
         print(repr_output)
+
+
+    def test_leaf_node(self):
+        node1 = LeafNode("p", "Hello, world!")
+        self.assertEqual(node1.to_html(), "<p>Hello, world!</p>")
+
+        node2 = LeafNode("a", "Click Here!", {'href':'https://www.google.com', 'target':'_blank'})
+        self.assertEqual(node2.to_html(), '<a href="https://www.google.com" target="_blank">Click Here!</a>')
+        
+        # Test raw text (no tag)
+        node3 = LeafNode(None, "Just some text")
+        self.assertEqual(node3.to_html(), "Just some text")
+
+        # Test invalid case (no value)
+        with self.assertRaises(ValueError):
+            node4 = LeafNode("p", None)
+            node4.to_html()
 
 
 if __name__ == "__main__":
