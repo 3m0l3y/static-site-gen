@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 class TestHTMLNode(unittest.TestCase):
 
@@ -50,6 +50,29 @@ class TestHTMLNode(unittest.TestCase):
         with self.assertRaises(ValueError):
             node4 = LeafNode("p", None)
             node4.to_html()
+
+
+    def test_parent_node(self):
+        li1 = LeafNode("li", "List item 1")
+        li2 = LeafNode("li", "List item 2")
+        li3 = LeafNode("li", "List item 3")
+        ul_list = ParentNode("ul", [li1, li2, li3])
+        print(ul_list.children)
+        self.assertEqual(ul_list.to_html(), "<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>")
+
+        '''
+        node2 = ParentNode("a", "Click Here!", {'href':'https://www.google.com', 'target':'_blank'})
+        self.assertEqual(node2.to_html(), '<a href="https://www.google.com" target="_blank">Click Here!</a>')
+        
+        # Test raw text (no tag)
+        node3 = ParentNode(None, "Just some text")
+        self.assertEqual(node3.to_html(), "Just some text")
+
+        # Test invalid case (no value)
+        with self.assertRaises(ValueError):
+            node4 = ParentNode("p", None)
+            node4.to_html()
+        '''
 
 
 if __name__ == "__main__":
