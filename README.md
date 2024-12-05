@@ -1,4 +1,4 @@
 # Author: Emily Allan
 # Date: 111624
 # static-site-gen
-Generates a static website page
+Generates a static website page from a markup notated file
