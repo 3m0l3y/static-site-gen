@@ -3,10 +3,10 @@ from enum import Enum
 class TextType(Enum):
     NORMAL  = "normal"
     BOLD = "bold"
-    ITALICT = "italic"
+    ITALIC = "italic"
     CODE = "code"
     LINK = "link"
-    IMAGES = "images"
+    IMAGE = "image"
 
 class TextNode:
     def __init__(self, text, text_type, url=None):
