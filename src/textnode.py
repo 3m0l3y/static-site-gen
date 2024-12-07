@@ -1,4 +1,5 @@
 from enum import Enum
+from htmlnode import LeafNode
 
 class TextType(Enum):
     NORMAL  = "normal"
@@ -29,4 +30,20 @@ class TextNode:
        url = self.url
        combined_string = f"TextNode({text}, {text_type}, {url})"
        return combined_string
+
+
+# convert a TextNode to an HTMLNode.
+def text_node_to_html_node(text_node):
+    text = text_node.text
+    print(text)
+    text_type = text_node.text_type
+    print(text_type)
+    if text_node.url is not None:
+        # do things
+    if text_node.alt is not None:
+        # do things
+
+    
+
+
 
