@@ -4,7 +4,6 @@ from htmlnode import HTMLNode, LeafNode, ParentNode
 
 class TestHTMLNode(unittest.TestCase):
 
-
     def test_html_initialization(self):  # Include 'self' here
         node = HTMLNode("p", "Hello, World!", [], {"class": "intro"})
 
@@ -32,7 +31,7 @@ class TestHTMLNode(unittest.TestCase):
     def test__rpr__(self):
         node = HTMLNode(tag="h1", value="The heading text is an h1 tag", children=["listvalue1", "listvalue2", "listvalue3"], props={"href": "https://boot.dev", "target": "_blank"})
         repr_output = repr(node)
-        print(repr_output)
+        #print(repr_output)
 
 
     def test_leaf_node(self):
@@ -53,26 +52,57 @@ class TestHTMLNode(unittest.TestCase):
 
 
     def test_parent_node(self):
+        # Test multiple leaf children
         li1 = LeafNode("li", "List item 1")
         li2 = LeafNode("li", "List item 2")
         li3 = LeafNode("li", "List item 3")
         ul_list = ParentNode("ul", [li1, li2, li3])
-        print(ul_list.children)
+        #print(ul_list.children)
         self.assertEqual(ul_list.to_html(), "<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>")
 
-        '''
-        node2 = ParentNode("a", "Click Here!", {'href':'https://www.google.com', 'target':'_blank'})
-        self.assertEqual(node2.to_html(), '<a href="https://www.google.com" target="_blank">Click Here!</a>')
-        
-        # Test raw text (no tag)
-        node3 = ParentNode(None, "Just some text")
-        self.assertEqual(node3.to_html(), "Just some text")
+        # Test single leaf child
+        sp1 = LeafNode("span", "Span item 1")
+        div1 = ParentNode("div", [sp1])
+        #print(div1.children)
+        self.assertEqual(div1.to_html(), "<div><span>Span item 1</span></div>")
 
-        # Test invalid case (no value)
+        # Test when parent has no tag
+        li1 = LeafNode("li", "List item 1")
+        li2 = LeafNode("li", "List item 2")
+        li3 = LeafNode("li", "List item 3")
+        ul_list = ParentNode(None, [li1, li2, li3])
+        #print(f"Debug - ul_list.tag: {ul_list.tag}") 
         with self.assertRaises(ValueError):
-            node4 = ParentNode("p", None)
-            node4.to_html()
-        '''
+            ul_list.to_html()
+
+        # Test when there are no children
+        ul_empty = ParentNode("ul", [])
+        with self.assertRaises(ValueError):
+            ul_empty.to_html()
+
+        # Nested ParentNode objects
+        parent = ParentNode("div", [
+            ParentNode("p", [
+            LeafNode("b", "Hello")
+            ])
+        ])
+        self.assertEqual(parent.to_html(), "<div><p><b>Hello</b></p></div>")
+
+        # Nested LeafNode objects
+        inner_items = [
+            LeafNode("li", "List1"),
+            LeafNode("li", "List2"),
+            LeafNode("li", "List3")
+        ]
+        inner_ul = ParentNode("ul", inner_items)
+        outer_li = ParentNode("li", [inner_ul])
+        parent = ParentNode("div", [
+            ParentNode("ul", [outer_li])
+        ])
+        self.assertEqual(parent.to_html(), "<div><ul><li><ul><li>List1</li><li>List2</li><li>List3</li></ul></li></ul></div>")
+
+
+        
 
 
 if __name__ == "__main__":
