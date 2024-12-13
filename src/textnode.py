@@ -33,10 +33,16 @@ class TextNode:
 
 
 # convert a TextNode to an HTMLNode. # Not complete
-def text_node_to_html_node(text, type):
-    print(f"This is the text passed through the function: {text}")
-    if text is not None and type = "BOLD":
-        print(f"BOLD text: {text}") # debug
+def text_node_to_html_node(text_node):
+    if text_node.text_type == TextType.NORMAL:
+        # handle TEXT type
+        print(text_node.text_type)
+    elif text_node.text_type == TextType.BOLD:
+        # handle BOLD type
+        # and so on for other TextTypes...
+        print(text_node.text_type)
+    else:
+        raise ValueError("Unknown TextType")
     
 
     

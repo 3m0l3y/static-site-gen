@@ -10,7 +10,7 @@ def main():
     test = TextNode("Test text in main.", TextType.BOLD, "https://www.dummydomain.com")
 
     # Testing text_node_to_html_node. Incomplete textnode.py file function.
-    text_node = TextNode(text="This is test text in the main.py file.", type=TextType.BOLD)
+    text_node = TextNode(text="This is test text in the main.py file.", text_type=TextType.BOLD)
     text_node_to_html_node(text_node)
 
     print(test)
