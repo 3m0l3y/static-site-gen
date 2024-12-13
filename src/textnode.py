@@ -32,16 +32,12 @@ class TextNode:
        return combined_string
 
 
-# convert a TextNode to an HTMLNode.
-def text_node_to_html_node(text_node):
-    text = text_node.text
-    print(text)
-    text_type = text_node.text_type
-    print(text_type)
-    if text_node.url is not None:
-        print(text_node.url) # debug
-    if text_node.alt is not None:
-        print(text_node.alt) # debug
+# convert a TextNode to an HTMLNode. # Not complete
+def text_node_to_html_node(text, type):
+    print(f"This is the text passed through the function: {text}")
+    if text is not None and type = "BOLD":
+        print(f"BOLD text: {text}") # debug
+    
 
     
 
