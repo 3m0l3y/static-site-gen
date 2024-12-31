@@ -40,7 +40,7 @@ class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
         if props is None:
             props = {}
-        #print(f"Children initialized: {children}")  # Debug    
+        #print(f"Children initialized: {children}")  # Debug   
         super().__init__(tag=tag, children=children, props=props)
         #print(f"Initializing ParentNode with children: {self.children}")
 
