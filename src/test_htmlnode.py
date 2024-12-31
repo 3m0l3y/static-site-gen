@@ -1,6 +1,8 @@
 import unittest
 
 from htmlnode import HTMLNode, LeafNode, ParentNode
+from textnode import TextNode, TextType, text_node_to_html_node
+
 
 class TestHTMLNode(unittest.TestCase):
 
@@ -102,7 +104,36 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(parent.to_html(), "<div><ul><li><ul><li>List1</li><li>List2</li><li>List3</li></ul></li></ul></div>")
 
 
+    def test_text_node_to_html_node(self):
+        text_node = TextNode("Hello, text only!", TextType.TEXT)
+        html_node = text_node_to_html_node(text_node)
+        assert html_node.value == "Hello, text only!"
         
+        text_node = TextNode("Hello, world!", TextType.BOLD)
+        html_node = text_node_to_html_node(text_node)
+        assert html_node.tag == "b"
+        assert html_node.value == "Hello, world!"
+
+        text_node2 = TextNode("SUP FOO!", TextType.ITALIC)
+        html_node2 = text_node_to_html_node(text_node2)
+        assert html_node2.tag == "i"
+        assert html_node2.value == "SUP FOO!"
+
+        text_node3 = TextNode("Website Link:", TextType.LINK, "https://www.nonsenselink.com")
+        html_node3 = text_node_to_html_node(text_node3)
+        assert html_node3.tag == "a"
+        assert html_node3.value == "Website Link:"
+        assert html_node3.props["href"] == "https://www.nonsenselink.com"
+
+        text_node4 = TextNode("some alternative text", TextType.IMAGE, "https://example.com/image.jpg")
+        html_node4 = text_node_to_html_node(text_node4)
+        assert html_node4.tag == "img"
+        assert html_node4.props["src"] == "https://example.com/image.jpg"
+        assert html_node4.props["alt"] == "some alternative text"
+
+
+
+
 
 
 if __name__ == "__main__":
