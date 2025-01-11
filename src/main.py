@@ -21,7 +21,7 @@ def main():
     # Call the split_nodes_delimiter function
     new_nodes = split_nodes_delimiter([node], "`", TextType.CODE)
 
-    print(f"testing main.py")
+    print(f"testing main.py bootdev sync with Git")
 
 if __name__ == "__main__":
     main()
