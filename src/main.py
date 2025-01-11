@@ -2,7 +2,7 @@
 from textnode import TextNode
 from textnode import TextType
 from textnode import text_node_to_html_node
-from parse_text import split_nodes_delimiter
+from split_nodes import split_nodes_delimiter
 
 
 def main():
@@ -16,18 +16,11 @@ def main():
 
     print(test)
 
-
-
-    # Create a sample TextNode
+    # Testing split_nodes.py Create a sample TextNode
     node = TextNode("This is a `code example`.", TextType.TEXT)
-
     # Call the split_nodes_delimiter function
     new_nodes = split_nodes_delimiter([node], "`", TextType.CODE)
-'''
-    # Check the output
-    for new_node in new_nodes:
-        print(new_node.content, new_node.text_type)
-'''
+
 
 
 if __name__ == "__main__":
