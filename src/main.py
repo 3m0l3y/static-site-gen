@@ -2,7 +2,7 @@
 from textnode import TextNode
 from textnode import TextType
 from htmlnode import text_node_to_html_node
-from split_nodes import split_nodes_delimiter
+from split_nodes import split_nodes_delimiter, extract_markdown_images
 
 
 def main():
@@ -29,6 +29,11 @@ def main():
 
     # Second pass - handle code (passing in the nodes from first pass)
     after_code = split_nodes_delimiter(after_bold, "`", TextType.CODE)
+
+    #Testing splitnodes extract links
+    test_node = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+    print(extract_markdown_images(test_node))
+
 
     print(f"testing main.py bootdev sync with Git")
 
