@@ -21,7 +21,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
 
 def extract_markdown_images(text):
-    list_of_tuples = []
+    list_of_tuples = [] # should include text and links. regex needs to split the text?
     links = re.findall(r"\((.*?)\)", text)
     list_of_tuples = tuple(links)
     return list_of_tuples
