@@ -21,6 +21,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
 
 def extract_markdown_images(text):
+    list_of_tuples = []
     links = re.findall(r"\((.*?)\)", text)
-    result_tuple = tuple(links)
-    return result_tuple
+    list_of_tuples = tuple(links)
+    return list_of_tuples
